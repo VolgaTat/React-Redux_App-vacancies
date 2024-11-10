@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import {TheHeader} from "./components/TheHeader";
+import {FilterPanel} from "./components/FilterPanel";
+import {JobList} from "./components/JobList";
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import data from "./mock/data.json";
+import {addVacanciesAction} from "./store/pinVacancies/vacancies-actions"
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(addVacanciesAction(data))
+  },[dispatch])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <TheHeader />
+     <div className='container'>
+      <FilterPanel />
+      <JobList />
+     </div>
+    </>
   );
 }
 
